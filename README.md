@@ -1,2 +1,2 @@
 # fury-starter
-Fury Springboot Starter
+-> see help.md in fury-spring-boot-starter
