@@ -36,3 +36,5 @@ public AccountDto getAccount(@RequestParam String accountNo) {
     return accountManager.findByAccountNo(accountNo);
 }
 ```
+
+A springboot demo project using this starter can be found at https://github.com/FredMencier/spring3-demo-fury
