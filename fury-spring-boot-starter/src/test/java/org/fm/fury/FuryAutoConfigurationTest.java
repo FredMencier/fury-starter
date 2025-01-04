@@ -2,6 +2,7 @@ package org.fm.fury;
 
 import org.apache.fury.Fury;
 import org.apache.fury.config.Language;
+import org.fm.fury.annotation.FuryObject;
 import org.fm.fury.config.FuryAutoConfiguration;
 import org.fm.fury.config.FuryProperties;
 import org.junit.jupiter.api.Assertions;
@@ -9,11 +10,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 
+import java.util.List;
+
 public class FuryAutoConfigurationTest {
 
     private static final ApplicationContextRunner APPLICATION_CONTEXT_RUNNER = new ApplicationContextRunner()
             .withConfiguration(AutoConfigurations.of(FuryAutoConfiguration.class))
-            .withPropertyValues("org.fury.scanPackages=org.test1,org.test2");
+            .withPropertyValues("org.fury.scanPackages=org.fm,org.test2");
 
     @Test
     public void shouldContainFuryBeans() {
@@ -40,6 +43,24 @@ public class FuryAutoConfigurationTest {
             String[] scanPackages = (String[]) furyConfig.get(FuryProperties.SCAN_PACKAGES_KEY);
             Assertions.assertNotNull(scanPackages);
             Assertions.assertEquals(2, scanPackages.length);
+        });
+    }
+
+    @Test
+    public void shouldRegisterMyObject() {
+        APPLICATION_CONTEXT_RUNNER.run(context -> {
+            Fury fury = (Fury) context.getBean("fury");
+            List<Class<?>> registeredClasses = fury.getClassResolver().getRegisteredClasses().stream().filter(aClass -> aClass.isAnnotationPresent(FuryObject.class)).toList();
+            Assertions.assertEquals(2, registeredClasses.size());
+        });
+    }
+
+    @Test
+    public void shouldRegisterMyObjectWithClassId() {
+        APPLICATION_CONTEXT_RUNNER.run(context -> {
+            Fury fury = (Fury) context.getBean("fury");
+            Class<?> registeredClass = fury.getClassResolver().getRegisteredClass(Short.parseShort("1000"));
+            Assertions.assertNotNull(registeredClass);
         });
     }
 }

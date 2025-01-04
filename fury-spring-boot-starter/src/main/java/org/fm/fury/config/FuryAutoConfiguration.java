@@ -66,10 +66,18 @@ public class FuryAutoConfiguration {
                 Reflections reflections = new Reflections(scanPackage);
                 Set<Class<?>> allClasses = reflections.getTypesAnnotatedWith(FuryObject.class);
                 allClasses.forEach(aClass -> {
-                    if (LOG.isDebugEnabled()) {
-                        LOG.debug("Register class %s as furyObject".formatted(aClass.getName()));
+                    FuryObject annotation = aClass.getAnnotation(FuryObject.class);
+                    if (annotation.classId() == 0) {
+                        if (LOG.isDebugEnabled()) {
+                            LOG.debug("Register class %s as furyObject with auto-generated id".formatted(aClass.getName()));
+                        }
+                        fury.register(aClass);
+                    } else {
+                        if (LOG.isDebugEnabled()) {
+                            LOG.debug("Register class %s as furyObject with id %s".formatted(aClass.getName(), annotation.classId()));
+                        }
+                        fury.register(aClass, annotation.classId());
                     }
-                    fury.register(aClass);
                 });
             }
         } else {

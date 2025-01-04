@@ -23,10 +23,17 @@ public class AccountDto {
 }
 ```
 
+You can specify classId if you do not want an auto-generated fury classId
+```java
+@FuryObject(classId = 1000)
+public class AccountDto {
+}
+```
+
 Configure package you want to scan to help starter to find fury objects
 ```properties
 #Fury Starter
-org.fury.scanPackages=org.heg
+org.fury.scanPackages=org.fm,org.test
 ```
 
 Use MediaType Fury in your controller to use communication with fury serialized objects
