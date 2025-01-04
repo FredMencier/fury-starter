@@ -12,11 +12,17 @@ import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 public class FuryAutoConfigurationTest {
 
     private static final ApplicationContextRunner APPLICATION_CONTEXT_RUNNER = new ApplicationContextRunner()
             .withConfiguration(AutoConfigurations.of(FuryAutoConfiguration.class))
-            .withPropertyValues("org.fury.scanPackages=org.fm,org.test2");
+            .withPropertyValues("org.fury.scanPackages=org.fm.dto,org.test2");
+
+    private static final ApplicationContextRunner APPLICATION_CONTEXT_RUNNER_BAD_OBJECT = new ApplicationContextRunner()
+            .withConfiguration(AutoConfigurations.of(FuryAutoConfiguration.class))
+            .withPropertyValues("org.fury.scanPackages=org.fm.obj");
 
     @Test
     public void shouldContainFuryBeans() {
@@ -62,5 +68,14 @@ public class FuryAutoConfigurationTest {
             Class<?> registeredClass = fury.getClassResolver().getRegisteredClass(Short.parseShort("1000"));
             Assertions.assertNotNull(registeredClass);
         });
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenRegister() {
+        assertThrows(
+                IllegalStateException.class,
+                () -> APPLICATION_CONTEXT_RUNNER_BAD_OBJECT.run(context -> context.getBean("fury")),
+                "Expected to throw IllegalStateException"
+        );
     }
 }
