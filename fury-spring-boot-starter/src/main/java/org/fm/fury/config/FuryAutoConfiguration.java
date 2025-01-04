@@ -3,6 +3,7 @@ package org.fm.fury.config;
 import org.apache.fury.Fury;
 import org.apache.fury.config.CompatibleMode;
 import org.apache.fury.config.Language;
+import org.apache.fury.util.Preconditions;
 import org.fm.fury.annotation.FuryObject;
 import org.fm.fury.FuryConfig;
 import org.reflections.Reflections;
@@ -67,16 +68,22 @@ public class FuryAutoConfiguration {
                 Set<Class<?>> allClasses = reflections.getTypesAnnotatedWith(FuryObject.class);
                 allClasses.forEach(aClass -> {
                     FuryObject annotation = aClass.getAnnotation(FuryObject.class);
-                    if (annotation.classId() == 0) {
+                    short classId = annotation.classId();
+                    if (classId == 0) {
                         if (LOG.isDebugEnabled()) {
                             LOG.debug("Register class %s as furyObject with auto-generated id".formatted(aClass.getName()));
                         }
                         fury.register(aClass);
                     } else {
                         if (LOG.isDebugEnabled()) {
-                            LOG.debug("Register class %s as furyObject with id %s".formatted(aClass.getName(), annotation.classId()));
+                            LOG.debug("Register class %s as furyObject with id %s".formatted(aClass.getName(), classId));
                         }
-                        fury.register(aClass, annotation.classId());
+                        Preconditions.checkArgument(
+                                classId >= 256 && classId <= Short.MAX_VALUE,
+                                "classId %s must be >= 256 and <= %s",
+                                classId,
+                                Short.MAX_VALUE);
+                        fury.register(aClass, classId);
                     }
                 });
             }

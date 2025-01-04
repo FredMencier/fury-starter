@@ -24,6 +24,7 @@ public class AccountDto {
 ```
 
 You can specify classId if you do not want an auto-generated fury classId
+classId must be >= 256 and <= Short.MAX_VALUE
 ```java
 @FuryObject(classId = 1000)
 public class AccountDto {
