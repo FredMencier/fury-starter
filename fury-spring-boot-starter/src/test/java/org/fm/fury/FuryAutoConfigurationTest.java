@@ -18,11 +18,11 @@ public class FuryAutoConfigurationTest {
 
     private static final ApplicationContextRunner APPLICATION_CONTEXT_RUNNER = new ApplicationContextRunner()
             .withConfiguration(AutoConfigurations.of(FuryAutoConfiguration.class))
-            .withPropertyValues("org.fury.scanPackages=org.fm.dto,org.test2");
+            .withPropertyValues("springboot.fury.scanPackages=org.fm.dto,org.test2");
 
     private static final ApplicationContextRunner APPLICATION_CONTEXT_RUNNER_BAD_OBJECT = new ApplicationContextRunner()
             .withConfiguration(AutoConfigurations.of(FuryAutoConfiguration.class))
-            .withPropertyValues("org.fury.scanPackages=org.fm.obj");
+            .withPropertyValues("springboot.fury.scanPackages=org.fm.obj");
 
     @Test
     public void shouldContainFuryBeans() {

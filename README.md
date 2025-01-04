@@ -1,8 +1,8 @@
 ## Reference Documentation
 - Use annotation @FuryObject to discover and register objects
 - Configuration :
-    - **org.fury.withLanguage** to define fury language
-    - **org.fury.scanPackages** list package to scan for objects registration
+    - **springboot.fury.withLanguage** to define fury language
+    - **springboot.fury.scanPackages** list package to scan for objects registration
 - Use mediaType **fury** or ***+fury** (FuryMediaType) to use fury serialization
 
 ## Getting Started
@@ -34,7 +34,7 @@ public class AccountDto {
 Configure package you want to scan to help starter to find fury objects
 ```properties
 #Fury Starter
-org.fury.scanPackages=org.fm,org.test
+springboot.fury.scanPackages=org.fm,org.test
 ```
 
 Use MediaType Fury in your controller to use communication with fury serialized objects

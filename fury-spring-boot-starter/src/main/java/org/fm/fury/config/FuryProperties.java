@@ -3,7 +3,7 @@ package org.fm.fury.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
-@ConfigurationProperties(prefix = "org.fury")
+@ConfigurationProperties(prefix = "springboot.fury")
 public record FuryProperties(
 
         @DefaultValue("JAVA")
