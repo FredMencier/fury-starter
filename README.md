@@ -1,14 +1,20 @@
 ## Reference Documentation
-- Use annotation @FuryObject to discover and register objects
+- Use annotation **@FuryObject** to discover and register objects
+
 - Configuration :
-    - **springboot.fury.withLanguage** to define fury language
-    - **springboot.fury.scanPackages** list package to scan for objects registration
-    - **springboot.fury.compressInt** see https://fury.apache.org/docs/guide/java_object_graph_guide
-    - **springboot.fury.compressLong** see https://fury.apache.org/docs/guide/java_object_graph_guide
-    - **springboot.fury.compressString** see https://fury.apache.org/docs/guide/java_object_graph_guide
-    - **springboot.fury.asyncCompilation** see https://fury.apache.org/docs/guide/java_object_graph_guide
-    - **springboot.fury.classRegistration** see https://fury.apache.org/docs/guide/java_object_graph_guide
-    - **springboot.fury.threadSafe** use threadsafe fury bean serializer/deserializer with pool of 2 to 10 beans
+
+  | Property | Mandatory | Default value | Description         |
+  |----------|-----------|---------------|---------------------|
+  | **springboot.fury.withLanguage** | false     | JAVA          | define fury language|
+  | **springboot.fury.scanPackages** | true      | none          | list package to scan for objects registration |
+  | **springboot.fury.compressInt** | false     | true          | see https://fury.apache.org/docs/guide/java_object_graph_guide |
+  | **springboot.fury.compressLong** | false     | true          | see https://fury.apache.org/docs/guide/java_object_graph_guide |
+  | **springboot.fury.compressString** | false     | false         | see https://fury.apache.org/docs/guide/java_object_graph_guide |
+  | **springboot.fury.asyncCompilation** | false     | false         | see https://fury.apache.org/docs/guide/java_object_graph_guide |
+  | **springboot.fury.classRegistration** | false     | true          | see https://fury.apache.org/docs/guide/java_object_graph_guide |
+  | **springboot.fury.threadSafe** | false     | true          | use threadsafe fury bean serializer/deserializer with pool of 2 to 10 beans |
+  |          |           |               |                     |
+
 - Use mediaType **fury** or ***+fury** (FuryMediaType) to use fury serialization
 
 ## Getting Started
