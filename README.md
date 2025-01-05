@@ -3,6 +3,12 @@
 - Configuration :
     - **springboot.fury.withLanguage** to define fury language
     - **springboot.fury.scanPackages** list package to scan for objects registration
+    - **springboot.fury.compressInt** see https://fury.apache.org/docs/guide/java_object_graph_guide
+    - **springboot.fury.compressLong** see https://fury.apache.org/docs/guide/java_object_graph_guide
+    - **springboot.fury.compressString** see https://fury.apache.org/docs/guide/java_object_graph_guide
+    - **springboot.fury.asyncCompilation** see https://fury.apache.org/docs/guide/java_object_graph_guide
+    - **springboot.fury.classRegistration** see https://fury.apache.org/docs/guide/java_object_graph_guide
+    - **springboot.fury.threadSafe** use threadsafe fury bean serializer/deserializer with pool of 2 to 10 beans
 - Use mediaType **fury** or ***+fury** (FuryMediaType) to use fury serialization
 
 ## Getting Started
