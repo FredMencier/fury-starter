@@ -1,7 +1,7 @@
 package org.fm.fury.converter;
 
 import com.google.common.collect.Lists;
-import org.apache.fury.Fury;
+import org.apache.fury.BaseFury;
 import org.apache.fury.io.FuryInputStream;
 import org.fm.fury.FuryMediaType;
 import org.fm.fury.annotation.FuryObject;
@@ -32,9 +32,9 @@ public class FuryMessageConverter extends AbstractHttpMessageConverter<Object> {
         mimeTypeList.add(new MediaType("application", FuryMediaType.allFurySubType, DEFAULT_CHARSET));
     }
 
-    private final Fury fury;
+    private final BaseFury fury;
 
-    public FuryMessageConverter(Fury fury) {
+    public FuryMessageConverter(BaseFury fury) {
         this.fury = fury;
         this.setSupportedMediaTypes(mimeTypeList);
     }

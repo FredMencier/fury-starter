@@ -1,6 +1,6 @@
 package org.fm.fury;
 
-import org.apache.fury.Fury;
+import org.apache.fury.BaseFury;
 import org.fm.fury.converter.FuryMessageConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,9 +17,9 @@ public class FuryWebConfig implements WebMvcConfigurer {
 
     private static final Logger LOG = LoggerFactory.getLogger(FuryWebConfig.class);
 
-    private final Fury fury;
+    private final BaseFury fury;
 
-    public FuryWebConfig(Fury fury) {
+    public FuryWebConfig(BaseFury fury) {
         this.fury = fury;
     }
 
