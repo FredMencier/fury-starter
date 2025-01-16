@@ -69,7 +69,7 @@ public class FuryAutoConfiguration {
                 .withCompatibleMode(CompatibleMode.COMPATIBLE);
         BaseFury fury;
         if (useThreadSafe) {
-            fury = furyBuilder.buildThreadSafeFuryPool(2, 10);
+            fury = furyBuilder.buildThreadSafeFury();
         } else {
             fury = furyBuilder.build();
         }

@@ -2,6 +2,7 @@ package org.fm.fury;
 
 import org.apache.fury.BaseFury;
 import org.apache.fury.Fury;
+import org.apache.fury.ThreadSafeFury;
 import org.apache.fury.config.Language;
 import org.apache.fury.pool.ThreadPoolFury;
 import org.fm.fury.annotation.FuryObject;
@@ -42,7 +43,7 @@ public class FuryAutoConfigurationTest {
     public void shouldContainFuryConfigLanguage() {
         APPLICATION_CONTEXT_RUNNER_THREADSAFE.run(context -> {
             BaseFury fury = (BaseFury) context.getBean("fury");
-            Assertions.assertInstanceOf(ThreadPoolFury.class, fury);
+            Assertions.assertInstanceOf(ThreadSafeFury.class, fury);
             FuryConfig furyConfig = (FuryConfig) context.getBean("furyConfig");
             Assertions.assertNotNull(Language.valueOf((String) furyConfig.get(FuryProperties.WITH_LANGUAGE_KEY)));
             Assertions.assertNotNull(fury);
