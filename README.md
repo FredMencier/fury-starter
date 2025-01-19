@@ -1,19 +1,21 @@
 ## Reference Documentation
 - Use annotation **@FuryObject** to discover and register objects
 
-- Configuration :
+ Configuration :
 
-  | Property | Mandatory | Default value | Description         |
-  |----------|-----------|---------------|---------------------|
-  | **springboot.fury.withLanguage** | false     | JAVA          | define fury language|
-  | **springboot.fury.scanPackages** | true      | none          | list package to scan for objects registration |
-  | **springboot.fury.compressInt** | false     | true          | see https://fury.apache.org/docs/guide/java_object_graph_guide |
-  | **springboot.fury.compressLong** | false     | true          | see https://fury.apache.org/docs/guide/java_object_graph_guide |
-  | **springboot.fury.compressString** | false     | false         | see https://fury.apache.org/docs/guide/java_object_graph_guide |
-  | **springboot.fury.asyncCompilation** | false     | false         | see https://fury.apache.org/docs/guide/java_object_graph_guide |
-  | **springboot.fury.classRegistration** | false     | true          | see https://fury.apache.org/docs/guide/java_object_graph_guide |
-  | **springboot.fury.threadSafe** | false     | true          | use threadsafe fury bean serializer/deserializer with pool of 2 to 10 beans |
-  |          |           |               |                     |
+  | Property                                 | Mandatory | Default value | Description                                                    |
+  |------------------------------------------|-----------|---------------|----------------------------------------------------------------|
+  | **springboot.fury.withLanguage**         | false     | JAVA          | define fury language                                           |
+  | **springboot.fury.scanPackages**         | **true**  | none          | list package to scan for objects registration                  |
+  | **springboot.fury.compressInt**          | false     | **true**      | see https://fury.apache.org/docs/guide/java_object_graph_guide |
+  | **springboot.fury.compressLong**         | false     | **true**      | see https://fury.apache.org/docs/guide/java_object_graph_guide |
+  | **springboot.fury.compressString**       | false     | false         | see https://fury.apache.org/docs/guide/java_object_graph_guide |
+  | **springboot.fury.asyncCompilation**     | false     | false         | see https://fury.apache.org/docs/guide/java_object_graph_guide |
+  | **springboot.fury.classRegistration**    | false     | **true**      | see https://fury.apache.org/docs/guide/java_object_graph_guide |
+  | **springboot.fury.threadSafe**           | false     | **true**      | use threadsafe fury bean                                       |
+  | **springboot.fury.treadSafeFuryPool**    | false     | false         | use threadsafe fury bean with pool of 2 to 10                  |
+  | **springboot.fury.minTreadSafeFuryPool** | false     | **2**         | min value of threadsafe fury bean pool                         |
+  | **springboot.fury.maxTreadSafeFuryPool** | false     | **10**        | max value of threadsafe fury bean pool                         |
 
 - Use mediaType **fury** or ***+fury** (FuryMediaType) to use fury serialization
 
