@@ -6,6 +6,7 @@ import org.apache.fury.ThreadSafeFury;
 import org.apache.fury.config.CompatibleMode;
 import org.apache.fury.config.FuryBuilder;
 import org.apache.fury.config.Language;
+import org.apache.fury.pool.ThreadPoolFury;
 import org.apache.fury.resolver.ClassResolver;
 import org.apache.fury.util.Preconditions;
 import org.fm.fury.FuryConfig;
@@ -22,6 +23,7 @@ import org.springframework.context.annotation.Bean;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Consumer;
 
 import static org.fm.fury.config.FuryProperties.*;
 
@@ -90,9 +92,12 @@ public class FuryAutoConfiguration {
             LOG.error("scanPackages property must be defined to register fury objects");
         }
 
+        Consumer<Fury> registerCallback = fury -> registerObject(classList, fury);
         BaseFury fury;
         if (useThreadSafeFuryPool) {
-            fury = registerObject(classList, furyBuilder.buildThreadSafeFuryPool(minPool, maxPool));
+            ThreadPoolFury threadSafeFury = (ThreadPoolFury) furyBuilder.buildThreadSafeFuryPool(minPool, maxPool);
+            threadSafeFury.registerCallback(registerCallback);
+            fury = threadSafeFury;
         } else if (useThreadSafe) {
             fury = registerObject(classList, furyBuilder.buildThreadSafeFury());
         } else {
